@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="relyLib/jquery-1.4.js"></script>
+    <script type="text/javascript" src="relyLib/underscore-min.js"></script>
+    <script type="text/javascript" src="relyLib/backbone-min.js"></script>
+    <script type="text/javascript">
+        var Student = Backbone.Model.extend({
+            initialize: function () {
+
+            },
+            defaults:{
+               code:"100",
+                name:'lll',
+                score:1
+            }
+        });
+        var stue = new Student();
+        stue.set({
+            code:"122",
+            name:"ggg",
+            score:23
+        });
+        stue.unset("name");
+        console.log(stue.get("name"));
+        stue.set("name",stue.previous("name"));
+        console.log(stue.toJSON());
+        stue.clear();
+        console.log(stue.toJSON());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

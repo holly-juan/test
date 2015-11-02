@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="relyLib/jquery-1.4.js"></script>
+    <script type="text/javascript" src="relyLib/underscore-min.js"></script>
+</head>
+<body>
+    <div id="divTip">click me</div>
+    <script type="text/javascript">
+        var divView = {
+            ele: '#divTip',
+            tip: 'hello underscore',
+            onClick: function () {
+                $(this.ele).html(this.tip);
+            }
+        };
+        _.bindAll(divView,'onClick');
+        $(divView.ele).bind('click',divView.onClick);
+        console.log(_.keys({one:1,two:2,three:3}));   //["one","two","three"]
+    </script>
+</body>
+</html>

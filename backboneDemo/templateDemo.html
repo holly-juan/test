@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>template</title>
+    <script type="text/javascript" src="relyLib/jquery-1.4.js"></script>
+    <script type="text/javascript" src="relyLib/underscore-min.js"></script>
+    <script type="text/javascript" src="relyLib/backbone-min.js"></script>
+    <style type="text/css">
+        body{
+            font-size: 13px;
+        }
+        ul{
+            list-style-type: none;
+            margin:0;
+            padding:0;
+            width:360px;
+        }
+        li:first-child span{
+            float:left;
+            border-bottom: solid 1px #cccccc;
+            background-color: #eeeeee;
+            font-weight: bold;
+        }
+        ul li span{
+            width:80px;
+            text-align:left;
+            float:left;
+            padding:0 5px;
+            border-bottom: solid 1px #ccc;
+            line-height: 28px;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/template" id="tpl">
+        <% var sum = 0,ave = 0;
+        var list = data.list;
+        for(var i = 0;i<list.length;i++){%>
+            <% var item = list[i] %>
+        <li>
+            <span><%=item.id%></span>
+            <span><%=item.name%></span>
+            <span><%=item.sex%></span>
+            <span><%=item.score%></span>
+        </li>
+        <% sum += parseInt(item.score)
+        ave = sum/list.length;
+        }%>
+        <li>
+            <span>ave:</span>
+            <span><%=ave%></span>
+            <span>sum:</span>
+            <span><%=sum%></span>
+        </li>
+    </script>
+    <ul id="element">
+        <li>
+            <span>学号</span>
+            <span>姓名</span>
+            <span>性别</span>
+            <span>总分</span>
+        </li>
+    </ul>
+    <script type="text/javascript">
+        var ele = $("#element"),
+                tpl = $("#tpl").html();
+        var data = {
+            list:[
+                {id:'1',name:'aa',sex:'女',score:'234'},
+                {id:'2',name:'bb',sex:'男',score:'430'},
+                {id:'3',name:'cc',sex:'男',score:'170'},
+                {id:'4',name:'dd',sex:'男',score:'299'}
+            ]
+        };
+        var htm = _.template(tpl,data);
+        ele.append(htm);
+    </script>
+</body>
+</html>

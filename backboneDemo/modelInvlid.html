@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="relyLib/jquery-1.4.js"></script>
+    <script type="text/javascript" src="relyLib/underscore-min.js"></script>
+    <script type="text/javascript" src="relyLib/backbone-min.js"></script>
+    <script type="text/javascript">
+        var Stu = Backbone.Model.extend({
+            initialize:function(){
+                this.on('invalid',function(model,error){
+                    console.log(error);
+                });
+            },
+            validate:function(attrs){
+                if(!_.isString(attrs.name)) return 'name should be string';
+                if(!_.isNumber(attrs.age)) return 'age should be number';
+            },
+            defaults:{
+                name:'lll',
+                age:22
+            }
+        });
+
+        var stumodel = new Stu();
+        stumodel.set({name:22,age:44},{"validate":true});
+        console.log(stumodel.toJSON());
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

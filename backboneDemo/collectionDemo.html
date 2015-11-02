@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="relyLib/jquery-1.4.js"></script>
+    <script type="text/javascript" src="relyLib/underscore-min.js"></script>
+    <script type="text/javascript" src="relyLib/backbone-min.js"></script>
+    <script type="text/javascript">
+        var Stu = Backbone.Model.extend({
+            defaults:{
+                name:"lll",
+                age:11
+            }
+        });
+        var stumodel = [{
+            name:"a",
+            age:1
+        },{
+            name:"b",
+            age:2
+        },{
+            name:"c",
+            age:3
+        }];
+        var stuCollection = Backbone.Collection.extend({
+            model:Stu,
+            good:function(){
+                return this.filter(function(stu){
+                    return stu.get("age")<2;
+                })
+            }
+        })
+//        var stuColl = new Backbone.Collection(stumodel,{model:Stu});
+//        for(var i = 0 ;i< stuColl.models.length;i++){
+//            console.log(i,stuColl.models[i].toJSON());
+//        }
+        var stuColl = new stuCollection(stumodel);
+        var stufil = stuColl.good();
+        for(var i = 0;i < stufil.length;i++){
+            console.log(stufil[i].toJSON());
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

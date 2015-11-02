@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>trigger</title>
+    <script type="text/javascript" src="relyLib/jquery-1.4.js"></script>
+    <script type="text/javascript" src="relyLib/underscore-min.js"></script>
+    <script type="text/javascript" src="relyLib/backbone-min.js"></script>
+    <script type="text/javascript">
+        var Person = Backbone.Model.extend({
+            defaults:{
+                name:'liu'
+            }
+        });
+        var person = new Person;
+        person.on("changeName",function(){
+            console.log('手动触发了事件');
+        })
+        person.set("name",'aaa');
+
+        person.trigger("changeName");
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

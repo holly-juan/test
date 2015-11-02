@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="relyLib/jquery-1.4.js"></script>
+    <script type="text/javascript" src="relyLib/underscore-min.js"></script>
+    <script type="text/javascript" src="relyLib/backbone-min.js"></script>
+    <script type="text/javascript">
+        //先触发属性事件，然后触发默认的change事件
+        var testModel = Backbone.Model.extend({
+            defaults:{
+                name:'刘',
+                sex:'男'
+            }
+        });
+        var test = new testModel;
+        //方式一：使用空格绑定多个事件
+//        test.on('change',function(){
+//            console.log('model had been changed');
+//        })
+        //test.set({name:'aaa'});
+//        test.on('change:sex change:name',function(model,value){
+//            console.log(model.previous('sex'));
+//            console.log('sex has changed,new value is '+value);
+//        })
+//        test.set({sex:'女',name:'aa'});
+
+
+        //方式二：使用哈希对象的方式绑定多个事件
+        var objEvent = {
+            "change sex": sexChange,
+            "change name": nameChange
+        };
+        test.on(objEvent);
+        function sexChange(model,value){
+            console.log(model.previous('sex'));
+            console.log('sex has changed,new value is '+model.get("sex"));
+        }
+        test.set({sex:'女'});
+
+        function nameChange(model,value){
+            console.log(model.previous('name'));
+            console.log('name has changed,new value is '+model.get("name"));
+        }
+        test.set({name:'aa'});
+        //男
+//        onDemo.html:37 sex has changed,new value is 女
+//        onDemo.html:42 刘
+//        onDemo.html:43 name has changed,new value is 刘
+//        onDemo.html:36 女
+//        onDemo.html:37 sex has changed,new value is 女
+//        onDemo.html:42 刘
+//        onDemo.html:43 name has changed,new value is aa
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
